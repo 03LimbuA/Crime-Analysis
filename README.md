@@ -26,7 +26,8 @@ For this project, I used Google Colab, leveraging its Jupyter Notebook interface
 
 - And, we use 'crime.describe(include='object')' to get back information on the NON-numerical columns
 <img width="629" alt="Screenshot 2025-01-20 at 17 56 51" src="https://github.com/user-attachments/assets/5d988aa5-75b6-4e84-a519-b53bb0a0bb7c" />
-Looking at the non-numerical columns, we can see that the count of incident_numbers is 319,050, but for unique incident_numbers we get a lower count of 282,517, which suggests that we have duplicate entries for incident_numbber - this is likely due to there being multiple types of crimes committed within a single incident. Additionally, looking at the DISTRICT column, we see that we have 12 unique dristicts, and the top district (most occuring) is B2.
+
+- Looking at the non-numerical columns, we can see that the count of incident_numbers is 319,050, but for unique incident_numbers we get a lower count of 282,517, which suggests that we have duplicate entries for incident_numbber - this is likely due to there being multiple types of crimes committed within a single incident. Additionally, looking at the DISTRICT column, we see that we have 12 unique dristicts, and the top district (most occuring) is B2.
 
 - '.columns' returns the columns in our data frame
 - we check for columns with missing values ('DISTRICT', 'SHOOTING', 'UCR_PART', 'STREET', 'Lat', 'Long')
