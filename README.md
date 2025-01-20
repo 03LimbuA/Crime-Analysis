@@ -47,6 +47,8 @@ For this project, I used Google Colab, leveraging its Jupyter Notebook interface
 <img width="248" alt="Screenshot 2025-01-20 at 19 37 19" src="https://github.com/user-attachments/assets/fd30488c-bf84-43c8-b447-6a57d23cbcc2" />
 
 -Once again, we look at the most common offense descriptions as a percentage of all crimes, and we visualise the results as a bar chart
+
+
 <img width="308" alt="Screenshot 2025-01-20 at 19 38 43" src="https://github.com/user-attachments/assets/72b4c56c-49d3-4e7d-96c8-eeb477804926" />
 
 - Next, we look at the number of crimes recorded for each year (remember, the datatset contains records from 2015-2018), we use the '.groupby()' and '.count()' functions - the results show us that the most crimes were committed in 2017
