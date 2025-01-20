@@ -7,4 +7,4 @@ For this project, I used Google Colab, leveraging its Jupyter Notebook interface
 
 ## The Process
 - Since we're using Python for this project, we import some essential libraries (numpy for numerical operations, pandas for data manipulation, matplotlib for creating visualisations, seaborn for statistical data visualisation, %matplotlib inline allows us to see the plots/results immediately below the code cells that produce them and not in a separate window).
-- Next, we use a 'for loop' to find the correct encoding to use in order to read our CSV file that contains the dataset we are using for this project.
+- Next, we use a 'for loop' to find the correct encoding to use in order to read our CSV file that contains the dataset we are using for this project. By default, 'pandas' uses utf-8 encoding; in this case, utf-8 encoding doesn't work in reading our CSV file 
