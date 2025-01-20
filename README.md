@@ -74,7 +74,7 @@ For this project, I used Google Colab, leveraging its Jupyter Notebook interface
 
 
 ## The code
-```
+```python
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -199,3 +199,4 @@ s3
 def highlight_max(s, props=''):
     return np.where(s == np.nanmax(s.values), props, '')
 s3.apply(highlight_max, props='color:white;background-color:darkgreen', axis=0)
+```
