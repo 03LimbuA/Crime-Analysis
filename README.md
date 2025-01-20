@@ -71,3 +71,131 @@ For this project, I used Google Colab, leveraging its Jupyter Notebook interface
 
 - Additionally, we investigate which districts recorded the most crimes on a yearly basis, using the '.groupby()' (grouping district and year) and '.count()' functions. We'll visualise the results through a heat map. We can see that district B2 recorded the highest no. of crimes between 2016-2017, along with districts C11 and D4.
 <img width="310" alt="Screenshot 2025-01-20 at 20 09 19" src="https://github.com/user-attachments/assets/403cfc4a-d807-42f6-9396-388b39bcb4fd" />
+
+
+## The code
+```
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from encodings.aliases import aliases
+
+%matplotlib inline
+
+alias_values = set(aliases.values())
+
+for encoding in set(aliases.values()):
+    try:
+        df=pd.read_csv("crime.csv", nrows=10, encoding=encoding)
+        print('successful', encoding)
+    except:
+        pass
+
+crime = pd.read_csv("/content/crime.csv", encoding="ISO-8859-11")
+
+crime.head()
+
+crime.shape
+
+crime.duplicated().sum()
+
+crime.drop_duplicates(inplace=True)
+
+crime.shape
+
+crime
+
+crime.info()
+
+crime.OCCURRED_ON_DATE.dt.year
+
+crime.OCCURRED_ON_DATE.dt.month
+
+crime.OCCURRED_ON_DATE.dt.weekday
+
+crime.OCCURRED_ON_DATE.dt.hour
+
+crime.OCCURRED_ON_DATE.dt.minute
+
+crime.describe()
+
+crime.describe(include='object')
+
+crime.columns[np.sum(crime.isnull()) != 0]
+
+print('Missing values in each column \n')
+crime[crime.columns].isnull().sum()
+
+crime.columns[np.sum(crime.isnull()) == 0]
+
+for col in crime.columns:
+    unique_count = crime[col].nunique()
+    print(col + " has " + str(unique_count) + " unique values")
+
+crime.OFFENSE_CODE_GROUP.value_counts()
+
+offense_group_vals = crime.OFFENSE_CODE_GROUP.value_counts()[:10]
+
+display(offense_group_vals / crime.shape[0])
+
+(offense_group_vals / crime.shape[0]).plot(kind='bar', color='pink');
+plt.title('Top 10 Offense Groups (as % of all crimes)');
+
+crime.OFFENSE_CODE_GROUP.value_counts().sort_values(ascending=True)[:10]
+
+crime.OFFENSE_DESCRIPTION.value_counts()
+
+offense_description_vals = crime.OFFENSE_DESCRIPTION.value_counts()[:10]
+
+display(offense_description_vals / crime.shape[0])
+
+(offense_description_vals / crime.shape[0]).plot(kind='bar', color='pink');
+plt.title('Top 10 Offense Descriptions (as % of all crimes)');
+
+crime.groupby('YEAR').count()['INCIDENT_NUMBER'].plot(kind='bar', color='pink');
+plt.title('Number of crimes');
+
+display(crime.groupby('DAY_OF_WEEK').count()['INCIDENT_NUMBER'].sort_values(ascending=False));
+
+crime.groupby('DAY_OF_WEEK').count()['INCIDENT_NUMBER'].sort_values(ascending=False).plot(kind='bar', color='pink');
+
+crime.groupby('HOUR').count()['INCIDENT_NUMBER'].plot(kind='bar', color='pink');
+
+week_and_hour = crime.groupby(['HOUR','DAY_OF_WEEK']).count()['INCIDENT_NUMBER'].unstack()
+
+week_and_hour = week_and_hour[['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']]
+
+sns.heatmap(week_and_hour, cmap=sns.cubehelix_palette(as_cmap=True));
+
+avg_crime = crime.groupby(['YEAR', 'MONTH']).count()['INCIDENT_NUMBER'].mean()
+print("The average number of crimes is " + str(avg_crime))
+
+year_and_month = crime.groupby(['MONTH', 'YEAR']).count()['INCIDENT_NUMBER'].unstack()
+
+def style_negative(v, props=''):
+    return props if v < avg_crime else None
+s2 = year_and_month.style.applymap(style_negative, props='color:blue;')\
+              .applymap(lambda v: 'opacity: 20%;' if (v < 0.3) and (v > -0.3) else None)
+s2
+
+def highlight_max(s, props=''):
+    return np.where(s == np.nanmax(s.values), props, '')
+s2.apply(highlight_max, props='color:white;background-color:darkgreen', axis=0)
+
+district_and_year = crime.groupby(['DISTRICT', 'YEAR']).count()['INCIDENT_NUMBER'].unstack()
+
+sns.heatmap(district_and_year, cmap=sns.cubehelix_palette(as_cmap=True));
+
+avg_crime_district = crime.groupby(['DISTRICT', 'YEAR']).count()['INCIDENT_NUMBER'].mean()
+print("The average crime per district per year is: " + str(avg_crime_district))
+
+def style_negative(v, props=''):
+    return props if v < avg_crime_district else None
+s3 = district_and_year.style.applymap(style_negative, props='color:blue;')\
+              .applymap(lambda v: 'opacity: 20%;' if (v < 0.3) and (v > -0.3) else None)
+s3
+
+def highlight_max(s, props=''):
+    return np.where(s == np.nanmax(s.values), props, '')
+s3.apply(highlight_max, props='color:white;background-color:darkgreen', axis=0)
