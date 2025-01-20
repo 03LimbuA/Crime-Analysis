@@ -41,7 +41,10 @@ For this project, I used Google Colab, leveraging its Jupyter Notebook interface
 - Next, we look at the top 10 most common crimes in terms of offense groups as a percentage of all crimes, and we visualise the results as a bar chart
 <img width="240" alt="Screenshot 2025-01-20 at 19 33 05" src="https://github.com/user-attachments/assets/71096ad2-e79e-4f57-b3c8-d024664c2a30" />
 
-<img width="308" alt="Screenshot 2025-01-20 at 19 33 57" src="https://github.com/user-attachments/assets/cdfcb729-e094-4c6c-a94d-dc967d1b4ec7" />
+<img width="308" alt="Screenshot 2025-01-20 at 20 26 19" src="https://github.com/user-attachments/assets/3b481910-5b6f-4709-aeae-a411422260ff" />
+
+
+
 
 - Next, we look at what the most common and least common offense descriptions are, through using the '.value_counts()' function
 <img width="248" alt="Screenshot 2025-01-20 at 19 37 19" src="https://github.com/user-attachments/assets/fd30488c-bf84-43c8-b447-6a57d23cbcc2" />
