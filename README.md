@@ -51,3 +51,12 @@ For this project, I used Google Colab, leveraging its Jupyter Notebook interface
 
 - Next, we look at the number of crimes recorded for each year (remember, the datatset contains records from 2015-2018), we use the '.groupby()' and '.count()' functions - the results show us that the most crimes were committed in 2017
 <img width="308" alt="Screenshot 2025-01-20 at 19 41 08" src="https://github.com/user-attachments/assets/a876c1e7-ec5e-4daf-8132-9a56b8f0335a" />
+
+- Next, we'll investigate whether there are more crimes committed on specific weekdays. Again, we use the '.groupby()' and '.count()' functions. We can see that the weekday with the most crimes recorded is Friday; however, there seems to be no significant difference amongst the weekdays in terms of no. of crimes recorded (all within 40,0000-50,0000 range).
+<img width="248" alt="Screenshot 2025-01-20 at 19 44 04" src="https://github.com/user-attachments/assets/d20b0e0d-e5dc-4927-ae97-4bde227e73e5" />
+<img width="308" alt="Screenshot 2025-01-20 at 19 45 04" src="https://github.com/user-attachments/assets/930940b5-4b7e-4e8f-b9cf-3c684a12db5a" />
+
+- Next, we'll investigate whether there are more crimes committed on specific times of the day. We can see that there's a significant decrease in the no. of crimes recorded during 1am - 5am, and that the highest no. of crimes are recorded late in the evening between 3pm - 6pm.
+<img width="308" alt="Screenshot 2025-01-20 at 19 51 01" src="https://github.com/user-attachments/assets/e6af9666-17a0-4b30-8b82-8026a4fe481b" />
+
+
