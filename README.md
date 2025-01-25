@@ -5,78 +5,18 @@ The official dataset is sourced from [Kaggle Crime data analysis](https://www.ka
 
 For this project, I used Google Colab, leveraging its Jupyter Notebook interface to write and execute Python code. This setup allowed me to analyse the data interactively and visualise the results from the analysis. The complete Google Colab notebook, displaying the coding and resulting data visualisations, can be accessed [here](https://github.com/03LimbuA/Crime-Analysis/blob/main/CrimeANALYSIS.ipynb).
 
-## Setting up the environment
-- Since we're using Python for this project, we import some essential libraries (numpy for numerical operations, pandas for data manipulation, matplotlib for creating visualisations, seaborn for statistical data visualisation, %matplotlib inline allows us to see the plots/results immediately below the code cells that produce them and not in a separate window).
-- Next, we use a 'for loop' to find the correct encoding to use in order to read our CSV file that contains the dataset we are using for this project. By default, 'pandas' uses utf-8 encoding; in this case, utf-8 encoding doesn't work in reading our CSV file. The 'for loop' gives us back all the encodings that we can use to read our file - we'll pick one from the list (ISO-8859-11) and use that.
-<img src="https://github.com/user-attachments/assets/9beff80a-4be4-48a8-bd16-5ff242237798" width="260" height="150"> 
-
-- We use 'crime.head()' to quickly inspect the table we're working with (e.g., we can see the columns and the values in the columns)
-- 'crime.shape' allows us to see the shape of the data we're working with - we find that our data has 319,073 rows and 17 columns
-- 'crime.duplicated().sum()' shows us the no. of duplicated rows (23 rows) and we eliminate these duplicated rows by using 'crime.drop_duplicates(inplace=True)' - we now have 319,050 rows
-- 'crime' shows us the beginning and end of the data frame (pandas, by default, gives us 10 rows of data)
-- 'crime.info()' gives us back summary information on the dataframe (e.g., the column, non-NULL counts, column's data type)
-<img width="300" alt="Screenshot 2025-01-20 at 17 47 16" src="https://github.com/user-attachments/assets/9ed6f455-be8d-452a-b240-9cae7c4a94e4" />
-
-- For this analysis, we want to be able to easily extract date time information from the column, and we can only do so if it's a date time column. So, we use the 'to_datetime()' function to convert the OCCURED_ON_DATE column, and using the '.info()' shows us that it has worked
-- Next, we extract the year, month, weekday, hour, minute - the below image shows an example of this (extracted year, image doesn't show all the rows outputted)
-<img width="150" alt="Screenshot 2025-01-20 at 17 54 10" src="https://github.com/user-attachments/assets/f3d9233c-15c8-4a72-a9fb-d4ce57664e27" />
-
-- Next, we use '.describe()' to get back information on the numeric columns
-<img src="https://github.com/user-attachments/assets/f238e420-333d-40f6-bdcd-8e26927a6b49" width="500" height="150">
-
-- And, we use 'crime.describe(include='object')' to get back information on the NON-numerical columns
-<img width="629" alt="Screenshot 2025-01-20 at 17 56 51" src="https://github.com/user-attachments/assets/5d988aa5-75b6-4e84-a519-b53bb0a0bb7c" />
-
-- Looking at the non-numerical columns, we can see that the count of incident_numbers is 319,050, but for unique incident_numbers we get a lower count of 282,517, which suggests that we have duplicate entries for incident_number - this is likely due to there being multiple types of crimes committed within a single incident. Additionally, looking at the DISTRICT column, we see that we have 12 unique dristicts, and the top district (most occuring) is B2.
-
-- '.columns' returns the columns in our data frame
-- we check for columns with missing values ('DISTRICT', 'SHOOTING', 'UCR_PART', 'STREET', 'Lat', 'Long')
-- we use a 'for loop' to check for the no. of unique values in each column
-<img width="270" alt="Screenshot 2025-01-20 at 18 13 56" src="https://github.com/user-attachments/assets/67f8594b-0116-4f8c-9996-6111d4ea4ebb" />
-
-## The Analysis
-- We find that the most common crime in terms of offense groups are Motor Vehical Accident Responses, and the least common crime is Burglary (no property taken)
-<img width="300" alt="Screenshot 2025-01-20 at 19 29 27" src="https://github.com/user-attachments/assets/5d3aeae0-420c-4a03-98fc-010996164ec0" />
-
-- Next, we look at the top 10 most common crimes in terms of offense groups as a percentage of all crimes, and we visualise the results as a bar chart
-<img width="240" alt="Screenshot 2025-01-20 at 19 33 05" src="https://github.com/user-attachments/assets/71096ad2-e79e-4f57-b3c8-d024664c2a30" />
-
-<img width="308" alt="Screenshot 2025-01-20 at 20 26 19" src="https://github.com/user-attachments/assets/3b481910-5b6f-4709-aeae-a411422260ff" />
-
-
-
-
-- Next, we look at what the most common and least common offense descriptions are, through using the '.value_counts()' function
-<img width="248" alt="Screenshot 2025-01-20 at 19 37 19" src="https://github.com/user-attachments/assets/fd30488c-bf84-43c8-b447-6a57d23cbcc2" />
-
--Once again, we look at the most common offense descriptions as a percentage of all crimes, and we visualise the results as a bar chart
-
-
-<img width="308" alt="Screenshot 2025-01-20 at 19 38 43" src="https://github.com/user-attachments/assets/72b4c56c-49d3-4e7d-96c8-eeb477804926" />
-
-- Next, we look at the number of crimes recorded for each year (remember, the datatset contains records from 2015-2018), we use the '.groupby()' and '.count()' functions - the results show us that the most crimes were committed in 2017
-<img width="308" alt="Screenshot 2025-01-20 at 19 41 08" src="https://github.com/user-attachments/assets/a876c1e7-ec5e-4daf-8132-9a56b8f0335a" />
-
-
-- Next, we'll investigate whether there are more crimes committed on specific weekdays. Again, we use the '.groupby()' and '.count()' functions. We can see that the weekday with the most crimes recorded is Friday; however, there seems to be no significant difference amongst the weekdays in terms of no. of crimes recorded (all within 40,0000-50,0000 range).
-<img width="248" alt="Screenshot 2025-01-20 at 19 44 04" src="https://github.com/user-attachments/assets/d20b0e0d-e5dc-4927-ae97-4bde227e73e5" />
-<img width="308" alt="Screenshot 2025-01-20 at 19 45 04" src="https://github.com/user-attachments/assets/930940b5-4b7e-4e8f-b9cf-3c684a12db5a" />
-
-
-- Next, we'll investigate whether there are more crimes committed on specific times of the day. We can see that there's a significant decrease in the no. of crimes recorded during 1am - 5am, and that the highest no. of crimes are recorded late in the evening between 3pm - 6pm.
-<img width="308" alt="Screenshot 2025-01-20 at 19 51 01" src="https://github.com/user-attachments/assets/e6af9666-17a0-4b30-8b82-8026a4fe481b" />
-
-
-- Next, we'll investigate on what days and during which time of the day most crimes are committed - we visualise this through a heat map (we use the imported 'seaborn' library to do this). We can see that most crimes occur on Mon, Tues, Sat, Sun, between 4pm - 6pm.
-<img width="310" alt="Screenshot 2025-01-20 at 19 56 59" src="https://github.com/user-attachments/assets/323d7094-6415-418e-8d81-daa7a17bed95" />
-
-
-- Next, we'll examine which months recorded no. of crimes below average, and which months, on average, did the most crimes occur. First, we find the average no. of crimes per month (7976.25 crimes). Then, we create a table (grouping Month and Year) showing the months in each year (2015-2018) and the recorded no. of crimes for each of those months. Next, we highlight values less than the average no. of crimes per month (7976.25 crimes) **blue** , and value with **more** than the average are highlighted **green**
-<img width="300" alt="Screenshot 2025-01-20 at 20 06 16" src="https://github.com/user-attachments/assets/032ba06f-0f91-4adc-b6fb-c2a95e713484" />
-
-- Additionally, we investigate which districts recorded the most crimes on a yearly basis, using the '.groupby()' (grouping district and year) and '.count()' functions. We'll visualise the results through a heat map. We can see that district B2 recorded the highest no. of crimes between 2016-2017, along with districts C11 and D4.
-<img width="310" alt="Screenshot 2025-01-20 at 20 09 19" src="https://github.com/user-attachments/assets/403cfc4a-d807-42f6-9396-388b39bcb4fd" />
-
+## Analysis Findings 
+- We find that the most common crimes, in terms of offense groups,  are Motor Vehicle Accident Responses, which accounts for around 0.12% of all crimes 
+- Larceny is the second most common crime, in terms of offense groups (around 0.04% behind Motor Vehicle Accident Responses)
+- The least common crime is Burglary (no property taken) 
+- We find that the most common offense description is ‘sick/injured/medical - person’, which accounts for around 0.06% of all crimes
+- The least common offense descriptions, which only had 1 data entry each, include ‘killing of felon by police’, ‘drugs - glue inhalation’, e.t.c.,
+- The data looks at crimes recorded from 2015-2018; we find that the most crimes were committed in 2017 (around 100,000 crimes), closely followed by 2016
+- When looking at whether there are more crimes committed on specific weekdays, we can see that the weekday with the most crimes recorded is Friday; however, there seems to be no significant difference amongst the weekdays in terms of no. of crimes recorded (all within 40,0000-50,0000 range)
+- When looking at whether there are more crimes committed on specific times of the day, we can see that there's a significant decrease in the no. of crimes recorded during 1am - 5am, and that the highest no. of crimes are recorded late in the evening between 3pm - 6pm
+- When looking at, overall, what days and during which time of the day most crimes are committed, we can see that most crimes occur on Mon, Tues, Sat, Sun, between 4pm - 6pm.
+- We find the average no. of crimes per month to be around 7976 crimes
+- We can see that district B2 recorded the highest no. of crimes between 2016-2017, along with districts C11 and D4.
 
 ## The code
 ```python
@@ -205,3 +145,76 @@ def highlight_max(s, props=''):
     return np.where(s == np.nanmax(s.values), props, '')
 s3.apply(highlight_max, props='color:white;background-color:darkgreen', axis=0)
 ```
+## Explaining the Process: Setting up the environment 
+- Since we're using Python for this project, we import some essential libraries (numpy for numerical operations, pandas for data manipulation, matplotlib for creating visualisations, seaborn for statistical data visualisation, %matplotlib inline allows us to see the plots/results immediately below the code cells that produce them and not in a separate window).
+- Next, we use a 'for loop' to find the correct encoding to use in order to read our CSV file that contains the dataset we are using for this project. By default, 'pandas' uses utf-8 encoding; in this case, utf-8 encoding doesn't work in reading our CSV file. The 'for loop' gives us back all the encodings that we can use to read our file - we'll pick one from the list (ISO-8859-11) and use that.
+<img src="https://github.com/user-attachments/assets/9beff80a-4be4-48a8-bd16-5ff242237798" width="260" height="150"> 
+
+- We use 'crime.head()' to quickly inspect the table we're working with (e.g., we can see the columns and the values in the columns)
+- 'crime.shape' allows us to see the shape of the data we're working with - we find that our data has 319,073 rows and 17 columns
+- 'crime.duplicated().sum()' shows us the no. of duplicated rows (23 rows) and we eliminate these duplicated rows by using 'crime.drop_duplicates(inplace=True)' - we now have 319,050 rows
+- 'crime' shows us the beginning and end of the data frame (pandas, by default, gives us 10 rows of data)
+- 'crime.info()' gives us back summary information on the dataframe (e.g., the column, non-NULL counts, column's data type)
+<img width="300" alt="Screenshot 2025-01-20 at 17 47 16" src="https://github.com/user-attachments/assets/9ed6f455-be8d-452a-b240-9cae7c4a94e4" />
+
+- For this analysis, we want to be able to easily extract date time information from the column, and we can only do so if it's a date time column. So, we use the 'to_datetime()' function to convert the OCCURED_ON_DATE column, and using the '.info()' shows us that it has worked
+- Next, we extract the year, month, weekday, hour, minute - the below image shows an example of this (extracted year, image doesn't show all the rows outputted)
+<img width="150" alt="Screenshot 2025-01-20 at 17 54 10" src="https://github.com/user-attachments/assets/f3d9233c-15c8-4a72-a9fb-d4ce57664e27" />
+
+- Next, we use '.describe()' to get back information on the numeric columns
+<img src="https://github.com/user-attachments/assets/f238e420-333d-40f6-bdcd-8e26927a6b49" width="500" height="150">
+
+- And, we use 'crime.describe(include='object')' to get back information on the NON-numerical columns
+<img width="629" alt="Screenshot 2025-01-20 at 17 56 51" src="https://github.com/user-attachments/assets/5d988aa5-75b6-4e84-a519-b53bb0a0bb7c" />
+
+- Looking at the non-numerical columns, we can see that the count of incident_numbers is 319,050, but for unique incident_numbers we get a lower count of 282,517, which suggests that we have duplicate entries for incident_number - this is likely due to there being multiple types of crimes committed within a single incident. Additionally, looking at the DISTRICT column, we see that we have 12 unique dristicts, and the top district (most occuring) is B2.
+
+- '.columns' returns the columns in our data frame
+- we check for columns with missing values ('DISTRICT', 'SHOOTING', 'UCR_PART', 'STREET', 'Lat', 'Long')
+- we use a 'for loop' to check for the no. of unique values in each column
+<img width="270" alt="Screenshot 2025-01-20 at 18 13 56" src="https://github.com/user-attachments/assets/67f8594b-0116-4f8c-9996-6111d4ea4ebb" />
+
+## The Analysis Process
+- We find that the most common crime in terms of offense groups are Motor Vehical Accident Responses, and the least common crime is Burglary (no property taken)
+<img width="300" alt="Screenshot 2025-01-20 at 19 29 27" src="https://github.com/user-attachments/assets/5d3aeae0-420c-4a03-98fc-010996164ec0" />
+
+- Next, we look at the top 10 most common crimes in terms of offense groups as a percentage of all crimes, and we visualise the results as a bar chart
+<img width="240" alt="Screenshot 2025-01-20 at 19 33 05" src="https://github.com/user-attachments/assets/71096ad2-e79e-4f57-b3c8-d024664c2a30" />
+
+<img width="308" alt="Screenshot 2025-01-20 at 20 26 19" src="https://github.com/user-attachments/assets/3b481910-5b6f-4709-aeae-a411422260ff" />
+
+
+
+
+- Next, we look at what the most common and least common offense descriptions are, through using the '.value_counts()' function
+<img width="248" alt="Screenshot 2025-01-20 at 19 37 19" src="https://github.com/user-attachments/assets/fd30488c-bf84-43c8-b447-6a57d23cbcc2" />
+
+-Once again, we look at the most common offense descriptions as a percentage of all crimes, and we visualise the results as a bar chart
+
+
+<img width="308" alt="Screenshot 2025-01-20 at 19 38 43" src="https://github.com/user-attachments/assets/72b4c56c-49d3-4e7d-96c8-eeb477804926" />
+
+- Next, we look at the number of crimes recorded for each year (remember, the datatset contains records from 2015-2018), we use the '.groupby()' and '.count()' functions - the results show us that the most crimes were committed in 2017
+<img width="308" alt="Screenshot 2025-01-20 at 19 41 08" src="https://github.com/user-attachments/assets/a876c1e7-ec5e-4daf-8132-9a56b8f0335a" />
+
+
+- Next, we'll investigate whether there are more crimes committed on specific weekdays. Again, we use the '.groupby()' and '.count()' functions. We can see that the weekday with the most crimes recorded is Friday; however, there seems to be no significant difference amongst the weekdays in terms of no. of crimes recorded (all within 40,0000-50,0000 range).
+<img width="248" alt="Screenshot 2025-01-20 at 19 44 04" src="https://github.com/user-attachments/assets/d20b0e0d-e5dc-4927-ae97-4bde227e73e5" />
+<img width="308" alt="Screenshot 2025-01-20 at 19 45 04" src="https://github.com/user-attachments/assets/930940b5-4b7e-4e8f-b9cf-3c684a12db5a" />
+
+
+- Next, we'll investigate whether there are more crimes committed on specific times of the day. We can see that there's a significant decrease in the no. of crimes recorded during 1am - 5am, and that the highest no. of crimes are recorded late in the evening between 3pm - 6pm.
+<img width="308" alt="Screenshot 2025-01-20 at 19 51 01" src="https://github.com/user-attachments/assets/e6af9666-17a0-4b30-8b82-8026a4fe481b" />
+
+
+- Next, we'll investigate on what days and during which time of the day most crimes are committed - we visualise this through a heat map (we use the imported 'seaborn' library to do this). We can see that most crimes occur on Mon, Tues, Sat, Sun, between 4pm - 6pm.
+<img width="310" alt="Screenshot 2025-01-20 at 19 56 59" src="https://github.com/user-attachments/assets/323d7094-6415-418e-8d81-daa7a17bed95" />
+
+
+- Next, we'll examine which months recorded no. of crimes below average, and which months, on average, did the most crimes occur. First, we find the average no. of crimes per month (7976.25 crimes). Then, we create a table (grouping Month and Year) showing the months in each year (2015-2018) and the recorded no. of crimes for each of those months. Next, we highlight values less than the average no. of crimes per month (7976.25 crimes) **blue** , and value with **more** than the average are highlighted **green**
+<img width="300" alt="Screenshot 2025-01-20 at 20 06 16" src="https://github.com/user-attachments/assets/032ba06f-0f91-4adc-b6fb-c2a95e713484" />
+
+- Additionally, we investigate which districts recorded the most crimes on a yearly basis, using the '.groupby()' (grouping district and year) and '.count()' functions. We'll visualise the results through a heat map. We can see that district B2 recorded the highest no. of crimes between 2016-2017, along with districts C11 and D4.
+<img width="310" alt="Screenshot 2025-01-20 at 20 09 19" src="https://github.com/user-attachments/assets/403cfc4a-d807-42f6-9396-388b39bcb4fd" />
+
+
