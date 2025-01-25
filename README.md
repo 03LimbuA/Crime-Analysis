@@ -18,6 +18,9 @@ For this project, I used Google Colab, leveraging its Jupyter Notebook interface
 - We find the average no. of crimes per month to be around 7976 crimes
 - We can see that district B2 recorded the highest no. of crimes between 2016-2017, along with districts C11 and D4.
 
+![Image 25-01-2025 at 22 04](https://github.com/user-attachments/assets/86926435-f864-4a68-892e-fae58b25d3d9)
+
+
 ## The code
 ```python
 import numpy as np
