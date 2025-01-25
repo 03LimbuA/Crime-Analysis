@@ -1,4 +1,4 @@
-# Crime-Exploratory Data Analysis
+# Exploratory Data Analysis - Crime data
 
 This exploratory data analysis project, inspired by Youtube Channel [Mo Chen](https://www.youtube.com/@mo-chen), examines a tabular dataset containing records from the Boston Police Department's crime incident reports (2015-2018), including details such as, the type, time, and location of the incidents.
 The official dataset is sourced from [Kaggle Crime data analysis](https://www.kaggle.com/code/sevgisarac/crime-data-analysis).
